@@ -25,10 +25,7 @@ public class CompanyDBDAO implements CompanyDAO {
 	public CompanyDBDAO() {
 		try {
 			connectionPool = ConnectionPool.getInstance();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

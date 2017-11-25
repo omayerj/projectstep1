@@ -15,7 +15,6 @@ import object.java.bens.Company;
 import object.java.bens.Coupon;
 import object.java.bens.CouponType;
 import object.java.bens.Customer;
-import sql.queries.CompanySQLQueries;
 import sql.queries.CouponSQLQueries;
 import sql.queries.JoinTableSQLQueries;
 

@@ -64,10 +64,7 @@ public class CouponSystem {
 			shadwon=true;
 			try {
 			ConnectionPool.getInstance().closeConnection();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
