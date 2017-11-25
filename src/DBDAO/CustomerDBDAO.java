@@ -13,6 +13,7 @@ import coupon.system.ConnectionPool;
 import object.java.bens.Coupon;
 import object.java.bens.Customer;
 import sql.queries.CompanySQLQueries;
+import sql.queries.CustomerSQLQueries;
 
 public class CustomerDBDAO implements CustomerDAO {
 
@@ -43,7 +44,7 @@ public class CustomerDBDAO implements CustomerDAO {
 
 			
 			PreparedStatement preparedStatement =
-					conn.prepareStatement(CompanySQLQueries.CREATE_CUSTOMER);
+					conn.prepareStatement(CustomerSQLQueries.CREATE_CUSTOMER);
 			preparedStatement.setString(1, c.getCustName());
 			preparedStatement.setString(2, c.getPassword());
 
@@ -107,7 +108,7 @@ public class CustomerDBDAO implements CustomerDAO {
 			// could be in wait state if no connection available!
 			conn = connectionPool.getConnection();
 			PreparedStatement preparedStatement =
-					conn.prepareStatement(CompanySQLQueries.UPDATE_CUSTOMER);
+					conn.prepareStatement(CustomerSQLQueries.UPDATE_CUSTOMER);
 			preparedStatement.setString(1, c.getCustName());
 			preparedStatement.setString(2, c.getPassword());
 			preparedStatement.setString(3, c.getId()+"");
@@ -143,7 +144,7 @@ public class CustomerDBDAO implements CustomerDAO {
 			ResultSet rs;
 
 			PreparedStatement preparedStatement =
-			conn.prepareStatement(CompanySQLQueries.GET_CUSTOMER_BY_ID);
+			conn.prepareStatement(CustomerSQLQueries.GET_CUSTOMER_BY_ID);
 			preparedStatement.setLong(1, id);
 			rs = preparedStatement.executeQuery();
 			System.out.println("SQL ****************SQL");
@@ -185,7 +186,7 @@ public class CustomerDBDAO implements CustomerDAO {
 			ResultSet rs;
 
 			
-			rs = stmt.executeQuery(CompanySQLQueries.GET_ALL_CUSTOMERS);
+			rs = stmt.executeQuery(CustomerSQLQueries.GET_ALL_CUSTOMERS);
 			while (rs.next()) {
 				int id = rs.getInt("ID");
 				String custName = rs.getString("CUST_NAME");
@@ -229,7 +230,7 @@ public class CustomerDBDAO implements CustomerDAO {
 
 			ResultSet rs;
 			
-			PreparedStatement statement = conn.prepareStatement(CompanySQLQueries.LOGIN_BY_CUSTOMER);    
+			PreparedStatement statement = conn.prepareStatement(CustomerSQLQueries.LOGIN_BY_CUSTOMER);    
 			statement.setString(1, custName);
 			statement.setString(2, password); 
 			rs = statement.executeQuery();
@@ -276,7 +277,7 @@ public class CustomerDBDAO implements CustomerDAO {
 			ResultSet rs;
 
 			PreparedStatement preparedStatement =
-			conn.prepareStatement(CompanySQLQueries.GET_CUSTOMER_BY_NAME);
+			conn.prepareStatement(CustomerSQLQueries.GET_CUSTOMER_BY_NAME);
 			preparedStatement.setString(1, name);
 			rs = preparedStatement.executeQuery();
 			System.out.println("SQL ****************SQL");

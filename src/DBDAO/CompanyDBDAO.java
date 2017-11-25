@@ -15,6 +15,7 @@ import object.java.bens.Company;
 import object.java.bens.Coupon;
 import object.java.bens.CouponType;
 import sql.queries.CompanySQLQueries;
+import sql.queries.JoinTableSQLQueries;
 
 public class CompanyDBDAO implements CompanyDAO {
 
@@ -49,7 +50,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			ResultSet rs;
 
 	
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.GET_ALL_COUPON_BY_COMPANY);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.GET_ALL_COUPON_BY_COMPANY);
 			preparedStatement.setLong(1, this.loginId);
 			rs = preparedStatement.executeQuery();
 			System.out.println("SQL ****************SQL");
@@ -102,7 +103,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			ResultSet rs;
 
 			PreparedStatement preparedStatement = conn
-					.prepareStatement(CompanySQLQueries.GET_COMPANY_COUPON_BY_COMP_ID);
+					.prepareStatement(JoinTableSQLQueries.GET_COMPANY_COUPON_BY_COMP_ID);
 			preparedStatement.setLong(1, c.getId());
 			rs = preparedStatement.executeQuery();
 			while (rs.next()) {
@@ -395,7 +396,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			conn = connectionPool.getConnection();
 
 			PreparedStatement preparedStatement = conn
-					.prepareStatement(CompanySQLQueries.REMOVE_COMPANY_COUPON_BY_COMP_ID);
+					.prepareStatement(JoinTableSQLQueries.REMOVE_COMPANY_COUPON_BY_COMP_ID);
 			preparedStatement.setString(1, c.getId() + "");
 			int rowsAffected = preparedStatement.executeUpdate();
 			System.out.println(rowsAffected + " rows affected");

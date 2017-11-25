@@ -13,6 +13,8 @@ import coupon.system.ConnectionPool;
 import object.java.bens.Coupon;
 import object.java.bens.CouponType;
 import sql.queries.CompanySQLQueries;
+import sql.queries.CouponSQLQueries;
+import sql.queries.JoinTableSQLQueries;
 
 public class CouponDBDAO implements CouponDAO {
 	private ConnectionPool connectionPool;
@@ -39,7 +41,7 @@ public class CouponDBDAO implements CouponDAO {
 			// could be in wait state if no connection available!
 			conn = connectionPool.getConnection();
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.CREATE_COUPON);
+			PreparedStatement preparedStatement = conn.prepareStatement(CouponSQLQueries.CREATE_COUPON);
 			preparedStatement.setString(1, c.getTitle());
 			preparedStatement.setDate(2, (Date) c.getStartDate());
 			preparedStatement.setDate(3, (Date) c.getEndDate());
@@ -75,7 +77,7 @@ public class CouponDBDAO implements CouponDAO {
 
 			
 			PreparedStatement preparedStatement =
-					conn.prepareStatement(CompanySQLQueries.REMOVE_COUPON+c.getId());
+					conn.prepareStatement(CouponSQLQueries.REMOVE_COUPON+c.getId());
 
 			int rowsAffected = preparedStatement.executeUpdate();
 			System.out.println(rowsAffected + " rows affected");
@@ -105,7 +107,7 @@ public class CouponDBDAO implements CouponDAO {
 			// could be in wait state if no connection available!
 			conn = connectionPool.getConnection();
 			PreparedStatement preparedStatement =
-					conn.prepareStatement(CompanySQLQueries.UPDATE_COUPON);
+					conn.prepareStatement(CouponSQLQueries.UPDATE_COUPON);
 			preparedStatement.setString(1, c.getEndDate()+"");
 			preparedStatement.setString(2, c.getStartDate()+"");
 			preparedStatement.setString(3, c.getId()+"");
@@ -141,7 +143,7 @@ public class CouponDBDAO implements CouponDAO {
 			ResultSet rs;
 
 			PreparedStatement preparedStatement =
-			conn.prepareStatement(CompanySQLQueries.GET_COUPON_BY_ID);
+			conn.prepareStatement(CouponSQLQueries.GET_COUPON_BY_ID);
 			preparedStatement.setLong(1, id);
 			rs = preparedStatement.executeQuery();
 			System.out.println("SQL ****************SQL");
@@ -198,7 +200,7 @@ public class CouponDBDAO implements CouponDAO {
 			ResultSet rs;
 
 			PreparedStatement preparedStatement =
-			conn.prepareStatement(CompanySQLQueries.GET_ALL_COUPON_BY_COMPANY);
+			conn.prepareStatement(JoinTableSQLQueries.GET_ALL_COUPON_BY_COMPANY);
 			rs = preparedStatement.executeQuery();
 			System.out.println("SQL ****************SQL");
 			System.out.println(preparedStatement.toString());
@@ -254,7 +256,7 @@ public class CouponDBDAO implements CouponDAO {
 			ResultSet rs;
 
 			PreparedStatement preparedStatement =
-			conn.prepareStatement(CompanySQLQueries.GET_COUPON_BY_TYPE);
+			conn.prepareStatement(CouponSQLQueries.GET_COUPON_BY_TYPE);
 			preparedStatement.setString(1, type.toString());
 			rs = preparedStatement.executeQuery();
 			System.out.println("SQL ****************SQL");
@@ -309,7 +311,7 @@ public class CouponDBDAO implements CouponDAO {
 			ResultSet rs;
 
 			PreparedStatement preparedStatement =
-			conn.prepareStatement(CompanySQLQueries.GET_COUPON_BY_TITLE);
+			conn.prepareStatement(CouponSQLQueries.GET_COUPON_BY_TITLE);
 			preparedStatement.setString(1, title);
 			rs = preparedStatement.executeQuery();
 			System.out.println("SQL ****************SQL");

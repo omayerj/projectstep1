@@ -26,7 +26,6 @@ public class DailyCoupounExpirationTask implements Runnable {
 		/*
 		 * delete coupon from 3 table 
 		 */
-			//TODO
 			/*
 				need to add for the reale porject 
 				to make daily task work and delete

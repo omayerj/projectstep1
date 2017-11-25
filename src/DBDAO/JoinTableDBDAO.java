@@ -16,6 +16,8 @@ import object.java.bens.Coupon;
 import object.java.bens.CouponType;
 import object.java.bens.Customer;
 import sql.queries.CompanySQLQueries;
+import sql.queries.CouponSQLQueries;
+import sql.queries.JoinTableSQLQueries;
 
 public class JoinTableDBDAO implements JoinTableDAO {
 	private ConnectionPool connectionPool;
@@ -38,14 +40,14 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			// could be in wait state if no connection available!
 			conn = connectionPool.getConnection();
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.REMOVE_COMPANY_COUPON_COUPON_BY_COUPON_ID);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.REMOVE_COMPANY_COUPON_COUPON_BY_COUPON_ID);
 			preparedStatement.setLong(1, c.getId());
 			System.out.println(preparedStatement);
 
 			int rowsAffected = preparedStatement.executeUpdate();
 			System.out.println(rowsAffected + " rows affected");
 			
-			preparedStatement = conn.prepareStatement(CompanySQLQueries.REMOVE_CUSTOMER_COUPON_BY_COUPON_ID);
+			preparedStatement = conn.prepareStatement(JoinTableSQLQueries.REMOVE_CUSTOMER_COUPON_BY_COUPON_ID);
 			preparedStatement.setLong(1, c.getId());
 			System.out.println(preparedStatement);
 
@@ -71,7 +73,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			// could be in wait state if no connection available!
 			conn = connectionPool.getConnection();
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.REMOVE_CUSTOMER_COUPON_BY_CUST_ID);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.REMOVE_CUSTOMER_COUPON_BY_CUST_ID);
 			preparedStatement.setLong(1, c.getId());
 			System.out.println(preparedStatement);
 
@@ -109,7 +111,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			// could be in wait state if no connection available!
 			conn = connectionPool.getConnection();
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.ADD_CUSTOMER_COUPON);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.ADD_CUSTOMER_COUPON);
 			preparedStatement.setLong(1, customer.getId());
 			preparedStatement.setLong(2, coupon.getId());
 			System.out.println(preparedStatement);
@@ -140,7 +142,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			// could be in wait state if no connection available!
 			conn = connectionPool.getConnection();
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.ADD_COMPANY_COUPON);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.ADD_COMPANY_COUPON);
 			preparedStatement.setLong(1, company.getId());
 			preparedStatement.setLong(2, coupon.getId());
 			System.out.println(preparedStatement);
@@ -174,7 +176,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 
 			ResultSet rs;
 
-			PreparedStatement statement = conn.prepareStatement(CompanySQLQueries.GET_CUSTOMER_COUPON);
+			PreparedStatement statement = conn.prepareStatement(JoinTableSQLQueries.GET_CUSTOMER_COUPON);
 			statement.setLong(1, custID);
 			statement.setLong(2, couponID);
 			rs = statement.executeQuery();
@@ -210,7 +212,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			conn = connectionPool.getConnection();
 			ResultSet rs;
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.GET_All_PURCHASES);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.GET_All_PURCHASES);
 			preparedStatement.setLong(1, id);
 			rs = preparedStatement.executeQuery();
 			System.out.println("SQL ****************SQL");
@@ -261,7 +263,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			conn = connectionPool.getConnection();
 			ResultSet rs;
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.GET_All_PURCHASES_TYPE);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.GET_All_PURCHASES_TYPE);
 			preparedStatement.setLong(1, id);
 			preparedStatement.setString(2, type.toString());
 			rs = preparedStatement.executeQuery();
@@ -311,7 +313,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			conn = connectionPool.getConnection();
 			ResultSet rs;
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.GET_All_PURCHASES_PRICE);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.GET_All_PURCHASES_PRICE);
 			preparedStatement.setLong(1, id);
 			preparedStatement.setDouble(2, price);
 			rs = preparedStatement.executeQuery();
@@ -364,7 +366,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			conn = connectionPool.getConnection();
 			ResultSet rs;
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.GET_All_COUPON_ALL_MAX_DATE_LESS);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.GET_All_COUPON_ALL_MAX_DATE_LESS);
 			preparedStatement.setLong(1, compId);
 			preparedStatement.setDate(2, maxEndDate);
 			rs = preparedStatement.executeQuery();
@@ -417,7 +419,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			conn = connectionPool.getConnection();
 			ResultSet rs;
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.GET_COUPON_BY_TITLE_FOR_COMPANY);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.GET_COUPON_BY_TITLE_FOR_COMPANY);
 			preparedStatement.setLong(1, compId);
 			preparedStatement.setString(2, type.toString());
 			rs = preparedStatement.executeQuery();
@@ -469,7 +471,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			conn = connectionPool.getConnection();
 			ResultSet rs;
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.GET_All_COUPON_ALL_PRICE_LESS);
+			PreparedStatement preparedStatement = conn.prepareStatement(JoinTableSQLQueries.GET_All_COUPON_ALL_PRICE_LESS);
 			preparedStatement.setLong(1, id);
 			preparedStatement.setDouble(2,price);
 			rs = preparedStatement.executeQuery();
@@ -521,7 +523,7 @@ public class JoinTableDBDAO implements JoinTableDAO {
 			conn = connectionPool.getConnection();
 			ResultSet rs;
 
-			PreparedStatement preparedStatement = conn.prepareStatement(CompanySQLQueries.GET_COUPONS_LESS_FROM_NOW);
+			PreparedStatement preparedStatement = conn.prepareStatement(CouponSQLQueries.GET_COUPONS_LESS_FROM_NOW);
 			preparedStatement.setDate(1, now);
 			rs = preparedStatement.executeQuery();
 			System.out.println("SQL ****************SQL");

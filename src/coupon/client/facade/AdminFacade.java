@@ -77,7 +77,6 @@ public class AdminFacade implements CouponClientFacade {
 		throw new RuntimeErrorException(null, "customer name is exists " + customer.toString());
 	}
 
-	// TODO
 	public void updateCustomer(Customer c) {
 		customerDBdao.updateCustomer(c);
 	}
